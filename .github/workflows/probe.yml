@@ -4,6 +4,6 @@ on:
   push:
 jobs:
   ping:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
-      - run: echo public-actions-ok
+      - run: echo public-self-hosted-ok
