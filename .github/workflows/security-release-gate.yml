@@ -24,4 +24,4 @@ jobs:
       - name: Run security release gate
         run: python scripts/enforcement_release_gate.py
       - name: Run deterministic 100-agent benchmark
-        run: python evals/enforcement_benchmark.py --agents 100 --actions 10000 --seed 20260916
+        run: python -m evals.enforcement_benchmark --agents 100 --actions 10000 --seed 20260916

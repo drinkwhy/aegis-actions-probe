@@ -21,7 +21,7 @@ jobs:
           python-version: '3.12'
       - name: Run deterministic reference workload
         run: |
-          python evals/enforcement_benchmark.py \
+          python -m evals.enforcement_benchmark \
             --agents 100 \
             --actions 10000 \
             --seed 20260916
