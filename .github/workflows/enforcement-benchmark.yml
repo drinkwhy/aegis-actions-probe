@@ -1,0 +1,27 @@
+name: Aegis Enforcement Benchmark
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reference-benchmark:
+    runs-on: self-hosted
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: drinkwhy/aegis-unified
+          token: ${{ secrets.AEGIS_CI_TOKEN }}
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run deterministic reference workload
+        run: |
+          python evals/enforcement_benchmark.py \
+            --agents 100 \
+            --actions 10000 \
+            --seed 20260916

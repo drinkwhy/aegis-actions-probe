@@ -1,0 +1,27 @@
+name: Security Release Gate
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  warrant-and-provenance:
+    runs-on: self-hosted
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: drinkwhy/aegis-unified
+          token: ${{ secrets.AEGIS_CI_TOKEN }}
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test dependencies
+        run: python -m pip install -r control_plane/requirements.txt
+      - name: Run security release gate
+        run: python scripts/enforcement_release_gate.py
+      - name: Run deterministic 100-agent benchmark
+        run: python evals/enforcement_benchmark.py --agents 100 --actions 10000 --seed 20260916

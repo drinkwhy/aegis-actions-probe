@@ -1,0 +1,11 @@
+name: actions-health
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: self-hosted
+    timeout-minutes: 5
+    steps:
+      - run: echo public-self-hosted-ok
